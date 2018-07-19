@@ -41,5 +41,7 @@ Bundle "Raimondi/delimitMate"
 Bundle "groenewege/vim-less"
 Bundle "Lokaltog/vim-easymotion"
 Bundle "tomasr/molokai"
+Bundle "majutsushi/tagbar"
+Bundle "Shougo/neocomplete"
 
 filetype on
