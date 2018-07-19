@@ -160,9 +160,6 @@ nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>s :call RunNearestSpec()<CR>
 nnoremap <Leader>l :call RunLastSpec()<CR>
 
-" Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -200,6 +197,9 @@ nmap <F5> :NERDTreeToggle<cr>
 let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
+
+" Run commands that require conque 
+nnoremap <Leader>r :ConqueTermSplit<space>rails<space>c<CR>
 
 " Emmet
 let g:user_emmet_mode='i' " enable for insert mode
