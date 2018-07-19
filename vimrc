@@ -67,8 +67,8 @@ augroup vimrcEx
     \ endif
 
   " Cucumber navigation commands
-  autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
-  autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+  "autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
+  "autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
@@ -237,8 +237,10 @@ set background=dark
 hi Normal  ctermfg=252 ctermbg=none
 hi comment ctermfg=3
 
+set shell=/bin/zsh\ -l
+
 " Vim-instant-markdown doesn't work in zsh
-set shell=bash\ -i
+"set shell=bash\ -i
 
 " Snippets author
 let g:snips_author = 'guodong'
