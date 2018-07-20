@@ -2,13 +2,31 @@
 " possible, as it has side effects.
 set nocompatible
 
+if has('python3')
+  silent! python3 1
+endif
+
+if has('pythonx')
+	let s:py = 'pythonx'
+	let s:pyeval = function('pyxeval')
+    "pythonx import neovim
+elseif has('python3')
+	let s:py = 'python3'
+	let s:pyeval = function('py3eval')
+else
+	let s:py = 'python'
+	let s:pyeval = function('pyeval')
+endif
+
 set helplang=cn
 set encoding=utf-8
 
 " Highlight current line
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
+au WinLeave * set nocursorline 
+au WinEnter * set cursorline 
 set cursorline
+"au WinLeave * set nocursorcolumn
+"au WinEnter * set cursorcolumn
 "set cursorcolumn
 
 " Leader
@@ -77,8 +95,8 @@ augroup vimrcEx
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
 
-  " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  " Automatically wrap at 100 characters for Markdown
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=100
 augroup END
 
 " Softtabs, 4 spaces
@@ -108,8 +126,8 @@ colorscheme molokai
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
-" Make it obvious where 120 characters is
-set textwidth=120
+" Make it obvious where 100 characters is
+set textwidth=100
 set colorcolumn=+1
 
 " Numbers
@@ -194,7 +212,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 nmap <F5> :NERDTreeToggle<cr>
 
 " Tagbar
-let g:tagbar_width=35
+let g:tagbar_width=40
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
 
@@ -245,73 +263,78 @@ set shell=/bin/zsh\ -l
 " Snippets author
 let g:snips_author = 'guodong'
 
-" neocomplete setting
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+if version >= 800
+    " Use deoplete.
+    let g:deoplete#enable_at_startup = 1 
+else
+    " neocomplete setting
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+    " Recommended key-mappings.
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
+    " <TAB>: completion.
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " <C-h>, <BS>: close popup and delete backword char.
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+    " Close popup by <Space>.
+    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+    " AutoComplPop like behavior.
+    "let g:neocomplete#enable_auto_select = 1
+
+    " Shell like behavior(not recommended).
+    "set completeopt+=longest
+    "let g:neocomplete#enable_auto_select = 1
+    "let g:neocomplete#disable_auto_complete = 1
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+    " Enable heavy omni completion.
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+    " For perlomni.vim setting.
+    " https://github.com/c9s/perlomni.vim
+    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'

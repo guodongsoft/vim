@@ -42,6 +42,11 @@ Bundle "groenewege/vim-less"
 Bundle "Lokaltog/vim-easymotion"
 Bundle "tomasr/molokai"
 Bundle "majutsushi/tagbar"
-Bundle "Shougo/neocomplete"
-
+if version >= 800
+  Bundle "Shougo/deoplete.nvim"
+  Bundle "roxma/nvim-yarp"
+  Bundle "roxma/vim-hug-neovim-rpc"
+else
+  Bundle "Shougo/neocomplete"
+endif
 filetype on
