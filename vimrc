@@ -136,8 +136,8 @@ highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
 " Make it obvious where 100 characters is
-set textwidth=100
-set colorcolumn=+1
+"set textwidth=100
+"set colorcolumn=+1
 
 " Numbers
 set number " Enable line number "显示行号
