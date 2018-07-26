@@ -267,5 +267,8 @@ hi comment ctermfg=3
 " Disable Folding
 let g:vim_markdown_folding_disabled = 1
 
+" Exclude patterns with vimgrep
+set wildignore+=node_modules/**
+
 " Snippets author
 let g:snips_author = 'guodong'
