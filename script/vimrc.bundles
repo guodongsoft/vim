@@ -1,5 +1,5 @@
 if &compatible
-  set nocompatible
+    set nocompatible
 end
 
 filetype off
@@ -33,9 +33,6 @@ Bundle 'mattn/emmet-vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'suan/vim-instant-Markdown'
 Bundle 'msanders/snipmate.vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'altercation/vim-colors-solarized'
@@ -46,11 +43,22 @@ Bundle 'groenewege/vim-less'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomasr/molokai'
 Bundle 'majutsushi/tagbar'
-if version >= 800
-  Bundle 'Shougo/deoplete.nvim'
-  Bundle 'roxma/nvim-yarp'
-  Bundle 'roxma/vim-hug-neovim-rpc'
+
+if (version >= 800)
+    Bundle 'Shougo/deoplete.nvim'
+    Bundle 'roxma/nvim-yarp'
+    Bundle 'roxma/vim-hug-neovim-rpc'
 else
-  Bundle 'Shougo/neocomplete'
+    Bundle 'Shougo/neocomplete'
 endif
+
+" Markdown
+Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
+if has('osx')
+    Bundle 'hashrocket/vim-macdown'
+else
+    Bundle 'suan/vim-instant-Markdown'
+endif
+
 filetype on
