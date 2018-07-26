@@ -263,6 +263,10 @@ map <C-n> :NERDTreeToggle<CR>
 set background=dark
 hi Normal  ctermfg=252 ctermbg=none
 hi comment ctermfg=3
+hi rubyInterpolationDelimiter ctermfg=208
+hi rubyRegexpDelimiter ctermfg=208
+hi rubyStringDelimiter ctermfg=208
+hi rubyDataDirective ctermfg=208
 
 " Disable Folding
 let g:vim_markdown_folding_disabled = 1
