@@ -182,10 +182,11 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" vim-rspec mappings
-nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-nnoremap <Leader>l :call RunLastSpec()<CR>
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -263,6 +264,7 @@ map <C-n> :NERDTreeToggle<CR>
 set background=dark
 hi Normal  ctermfg=252 ctermbg=none
 hi comment ctermfg=3
+hi Delimiter ctermfg=150
 hi rubyInterpolationDelimiter ctermfg=208
 hi rubyRegexpDelimiter ctermfg=208
 hi rubyStringDelimiter ctermfg=208
