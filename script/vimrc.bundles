@@ -43,6 +43,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomasr/molokai'
 Bundle 'majutsushi/tagbar'
+Bundle 'chemzqm/vim-jsx-improve'
 
 if (version >= 800)
     Bundle 'Shougo/deoplete.nvim'
