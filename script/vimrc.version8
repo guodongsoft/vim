@@ -21,6 +21,7 @@ else
     endf
 endif
 nnoremap <F4> :call OpenTerminal()<CR>
+nnoremap <F8> :call OpenTerminal()<CR>rails<space>c<CR>
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1 
