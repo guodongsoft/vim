@@ -13,6 +13,9 @@ map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 
+" Paste from os clipboard
+map <leader>m "+gp
+
 " Index ctags from any project, including those outside Rails
 map <leader>ct :!ctags -R .<CR>
 
