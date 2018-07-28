@@ -17,7 +17,7 @@ else
         botright split
         " resize the height of terminal windows to 12
         resize 12
-        :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+        :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
     endf
 endif
 nnoremap <F4> :call OpenTerminal()<CR>
