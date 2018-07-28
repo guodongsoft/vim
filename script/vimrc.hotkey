@@ -1,0 +1,46 @@
+" Leader
+let mapleader = ","
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" Index ctags from any project, including those outside Rails
+map <Leader>ct :!ctags -R .<CR>
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+" Run commands that require conque 
+nnoremap <Leader>r :ConqueTermSplit<space>rails<space>c<CR>
+
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <S-Tab> <c-n>
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" 按下F5重新生成tag文件，并更新taglist
+map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+
+nmap <F6> :NERDTreeToggle<CR>
+nmap <F7> :TagbarToggle<CR>
+
+" nohlsearch shortcut
+nmap -hl :nohlsearch<cr>
+nmap +hl :set hlsearch<cr>

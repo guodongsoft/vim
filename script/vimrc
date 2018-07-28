@@ -29,9 +29,6 @@ set cursorline
 "au WinEnter * set cursorcolumn
 "set cursorcolumn
 
-" Leader
-let mapleader = ","
-
 set backspace=2 " 设置退格键可用
 set nobackup
 set nowritebackup
@@ -69,16 +66,6 @@ endif
 
 if filereadable(expand("~/.vim/script/vimrc.bundles"))
     source ~/.vim/script/vimrc.bundles
-endif
-
-if version >= 800
-    if filereadable(expand("~/.vim/script/vimrc.version8"))
-        source ~/.vim/script/vimrc.version8
-    endif
-else
-    if filereadable(expand("~/.vim/script/vimrc.version7"))
-        source ~/.vim/script/vimrc.version7
-    endif
 endif
 
 filetype plugin indent on
@@ -156,38 +143,15 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
 
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
-" Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R .<CR>
-
 "--ctags setting--
-" 按下F5重新生成tag文件，并更新taglist
-map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
-imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
 set tags+=/usr/include/c++/tags
 set tags+=~/source/tags
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
-
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -195,12 +159,6 @@ let g:html_indent_tags = 'li\|p'
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
-
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
@@ -220,15 +178,10 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="left"
 autocmd vimenter * if !argc() | NERDTree | endif " Automatically open a NERDTree if no files where specified
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " Close vim if the only window left open is a NERDTree
-nmap <F5> :NERDTreeToggle<CR>
 
 " Tagbar
 let g:tagbar_width=40
 let g:tagbar_autofocus=1
-nmap <F6> :TagbarToggle<CR>
-
-" Run commands that require conque 
-nnoremap <Leader>r :ConqueTermSplit<space>rails<space>c<CR>
 
 " Emmet
 let g:user_emmet_mode='i' " enable for insert mode
@@ -237,25 +190,12 @@ let g:user_emmet_mode='i' " enable for insert mode
 set incsearch " 输入字符串就显示匹配点
 set hlsearch  " Search results high light
 
-" nohlsearch shortcut
-nmap -hl :nohlsearch<cr>
-nmap +hl :set hlsearch<cr>
-
 " Javascript syntax hightlight
 syntax enable
 
 " ctrap
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -276,3 +216,17 @@ set wildignore+=node_modules/**
 
 " Snippets author
 let g:snips_author = 'guodong'
+
+if version >= 800
+    if filereadable(expand("~/.vim/script/vimrc.version8"))
+        source ~/.vim/script/vimrc.version8
+    endif
+else
+    if filereadable(expand("~/.vim/script/vimrc.version7"))
+        source ~/.vim/script/vimrc.version7
+    endif
+endif
+
+if filereadable(expand("~/.vim/script/vimrc.hotkey"))
+    source ~/.vim/script/vimrc.hotkey
+endif
