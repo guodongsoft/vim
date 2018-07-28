@@ -226,6 +226,30 @@ let g:tagbar_width=40
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
 
+" Terminal
+if has('nvim')
+  fu! OpenTerminal()
+   " open split windows on the topleft
+   "topleft split
+   " open split windows on the botright
+   botright split
+   " resize the height of terminal windows to 12
+   resize 12
+   :terminal
+  endf
+else
+  fu! OpenTerminal()
+   " open split windows on the topleft
+   "topleft split
+   " open split windows on the botright
+   botright split
+   " resize the height of terminal windows to 12
+   resize 12
+   :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+  endf
+endif
+nnoremap <F7> :call OpenTerminal()<CR>
+
 " Run commands that require conque 
 nnoremap <Leader>r :ConqueTermSplit<space>rails<space>c<CR>
 
