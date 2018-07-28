@@ -1,26 +1,30 @@
 " Terminal
 if has('nvim')
     fu! OpenTerminal()
-        " open split windows on the topleft
-        "topleft split
-        " open split windows on the botright
-        botright split
-        " resize the height of terminal windows to 12
-        resize 12
         :terminal
     endf
 else
     fu! OpenTerminal()
-        " open split windows on the topleft
-        "topleft split
-        " open split windows on the botright
-        botright split
-        " resize the height of terminal windows to 12
-        resize 12
         :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
     endf
 endif
-nnoremap <F4> :call OpenTerminal()<CR>
+
+fu! Split()
+    " open split windows on the botright
+    split
+    " resize the height of terminal windows
+    resize 15
+    :call OpenTerminal()
+endf
+
+fu! VSplit()
+    " open split windows on the right
+    vsplit
+    :call OpenTerminal()
+endf
+
+nnoremap <F3> :call Split()<CR>
+nnoremap <F4> :call VSplit()<CR>
 nnoremap <F8> :call OpenTerminal()<CR>rails<space>c<CR>
 
 " Use deoplete.
