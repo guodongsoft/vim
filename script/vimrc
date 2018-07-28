@@ -72,11 +72,12 @@ if filereadable(expand("~/.vim/script/vimrc.bundles"))
 endif
 
 if version >= 800
-    " Use deoplete.
-    let g:deoplete#enable_at_startup = 1 
+    if filereadable(expand("~/.vim/script/vimrc.version8"))
+        source ~/.vim/script/vimrc.version8
+    endif
 else
     if filereadable(expand("~/.vim/script/vimrc.version7"))
-      source ~/.vim/script/vimrc.version7
+        source ~/.vim/script/vimrc.version7
     endif
 endif
 
@@ -219,36 +220,12 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="left"
 autocmd vimenter * if !argc() | NERDTree | endif " Automatically open a NERDTree if no files where specified
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " Close vim if the only window left open is a NERDTree
-nmap <F5> :NERDTreeToggle<cr>
+nmap <F5> :NERDTreeToggle<CR>
 
 " Tagbar
 let g:tagbar_width=40
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
-
-" Terminal
-if has('nvim')
-  fu! OpenTerminal()
-   " open split windows on the topleft
-   "topleft split
-   " open split windows on the botright
-   botright split
-   " resize the height of terminal windows to 12
-   resize 12
-   :terminal
-  endf
-else
-  fu! OpenTerminal()
-   " open split windows on the topleft
-   "topleft split
-   " open split windows on the botright
-   botright split
-   " resize the height of terminal windows to 12
-   resize 12
-   :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
-  endf
-endif
-nnoremap <F7> :call OpenTerminal()<CR>
 
 " Run commands that require conque 
 nnoremap <Leader>r :ConqueTermSplit<space>rails<space>c<CR>
@@ -279,9 +256,6 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-
-nmap <F8> :TagbarToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well

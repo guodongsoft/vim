@@ -1,0 +1,26 @@
+" Terminal
+if has('nvim')
+    fu! OpenTerminal()
+        " open split windows on the topleft
+        "topleft split
+        " open split windows on the botright
+        botright split
+        " resize the height of terminal windows to 12
+        resize 12
+        :terminal
+    endf
+else
+    fu! OpenTerminal()
+        " open split windows on the topleft
+        "topleft split
+        " open split windows on the botright
+        botright split
+        " resize the height of terminal windows to 12
+        resize 12
+        :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+    endf
+endif
+nnoremap <F4> :call OpenTerminal()<CR>
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1 
