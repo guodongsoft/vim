@@ -43,6 +43,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomasr/molokai'
 Bundle 'majutsushi/tagbar'
 Bundle 'chemzqm/vim-jsx-improve'
+Bundle 'Chiel92/vim-autoformat'
+Bundle 'editorconfig/editorconfig-vim'
 
 if (version >= 800)
     Bundle 'Shougo/deoplete.nvim'

@@ -70,6 +70,9 @@ endif
 
 filetype plugin indent on
 
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags 
+
 augroup vimrcEx
     autocmd!
 
@@ -96,10 +99,10 @@ augroup vimrcEx
     autocmd BufRead,BufNewFile *.md setlocal textwidth=100
 augroup END
 
-" Softtabs, 4 spaces
-set tabstop=4 " 设置制表符(tab键)的宽度
-set softtabstop=4 " 设置软制表符的宽度
-set shiftwidth=4 " (自动) 缩进使用的4个空格
+" Softtabs, 2 spaces
+set tabstop=2 " 设置制表符(tab键)的宽度
+set softtabstop=2 " 设置软制表符的宽度
+set shiftwidth=2 " (自动) 缩进使用的2个空格
 set shiftround
 set expandtab
 
@@ -209,6 +212,9 @@ hi rubyInterpolationDelimiter ctermfg=208
 hi rubyRegexpDelimiter ctermfg=208
 hi rubyStringDelimiter ctermfg=208
 hi rubyDataDirective ctermfg=208
+
+" 自动格式化代码
+let g:autoformat_verbosemode=1
 
 " Disable Folding
 let g:vim_markdown_folding_disabled = 1
