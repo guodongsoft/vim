@@ -3,19 +3,19 @@
 set nocompatible
 
 if has('python3')
-    silent! python3 1
+  silent! python3 1
 endif
 
 if has('pythonx')
-    let s:py = 'pythonx'
-    let s:pyeval = function('pyxeval')
-    "pythonx import neovim
+  let s:py = 'pythonx'
+  let s:pyeval = function('pyxeval')
+  "pythonx import neovim
 elseif has('python3')
-    let s:py = 'python3'
-    let s:pyeval = function('py3eval')
+  let s:py = 'python3'
+  let s:pyeval = function('py3eval')
 else
-    let s:py = 'python'
-    let s:pyeval = function('pyeval')
+  let s:py = 'python'
+  let s:pyeval = function('pyeval')
 endif
 
 set helplang=cn
@@ -61,12 +61,16 @@ set showmode " 命令行显示vim当前模式
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-    syntax on
+  syntax on
 endif
 
-if filereadable(expand("~/.vim/script/vimrc.bundles"))
-    source ~/.vim/script/vimrc.bundles
-endif
+function! LoadScript(file)
+  if filereadable(expand(a:file))
+    exec printf('source %s', a:file)
+  endif
+endfunction
+
+call LoadScript("~/.vim/script/vimrc.bundles")
 
 filetype plugin indent on
 
@@ -74,29 +78,29 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags 
 
 augroup vimrcEx
-    autocmd!
+  autocmd!
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it for commit messages, when the position is invalid, or when
-    " inside an event handler (happens when dropping a file on gvim).
-    autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 
-    " Cucumber navigation commands
-    "autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
-    "autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+  " Cucumber navigation commands
+  "autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
+  "autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
-    " Set syntax highlighting for specific file types
-    autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
+  " Set syntax highlighting for specific file types
+  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-    " Enable spellchecking for Markdown
-    autocmd FileType markdown setlocal spell
+  " Enable spellchecking for Markdown
+  autocmd FileType markdown setlocal spell
 
-    " Automatically wrap at 100 characters for Markdown
-    autocmd BufRead,BufNewFile *.md setlocal textwidth=100
+  " Automatically wrap at 100 characters for Markdown
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=100
 augroup END
 
 " Softtabs, 2 spaces
@@ -111,14 +115,14 @@ set list listchars=tab:?·,trail:·
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-    " Use Ag over Grep
-    set grepprg=ag\ --nogroup\ --nocolor
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 endif
 
 " Color scheme
@@ -139,12 +143,12 @@ set numberwidth=5
 " will use completion if not at beginning
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
 endfunction
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <C-n>
@@ -226,17 +230,9 @@ set wildignore+=node_modules/**
 let g:snips_author = 'guodong'
 
 if version >= 800
-    if filereadable(expand("~/.vim/script/vimrc.version8"))
-        source ~/.vim/script/vimrc.version8
-    endif
+  call LoadScript("~/.vim/script/vimrc.version8")
 else
-    if filereadable(expand("~/.vim/script/vimrc.version7"))
-        source ~/.vim/script/vimrc.version7
-    endif
+  call LoadScript("~/.vim/script/vimrc.version7")
 endif
-if filereadable(expand("~/.vim/script/vimrc.hotkey"))
-    source ~/.vim/script/vimrc.hotkey
-endif
-if filereadable(expand("~/.vim/script/vimrc.ruby"))
-    source ~/.vim/script/vimrc.ruby
-endif
+call LoadScript("~/.vim/script/vimrc.hotkey")
+call LoadScript("~/.vim/script/vimrc.ruby")
