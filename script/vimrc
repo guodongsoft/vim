@@ -234,7 +234,9 @@ else
         source ~/.vim/script/vimrc.version7
     endif
 endif
-
 if filereadable(expand("~/.vim/script/vimrc.hotkey"))
     source ~/.vim/script/vimrc.hotkey
+endif
+if filereadable(expand("~/.vim/script/vimrc.ruby"))
+    source ~/.vim/script/vimrc.ruby
 endif
