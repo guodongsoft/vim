@@ -74,11 +74,14 @@ call LoadScript("~/.vim/script/vimrc.bundles")
 
 filetype plugin indent on
 
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags 
-
 augroup vimrcEx
   autocmd!
+
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags 
+
+  " JQuery syntax support
+  autocmd Syntax javascript set syntax=jquery
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
@@ -101,6 +104,11 @@ augroup vimrcEx
 
   " Automatically wrap at 100 characters for Markdown
   autocmd BufRead,BufNewFile *.md setlocal textwidth=100
+
+  " Automatically open a NERDTree if no files where specified
+  autocmd vimenter * if !argc() | NERDTree | endif
+  " Close vim if the only window left open is a NERDTree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
 " Softtabs, 2 spaces
@@ -181,8 +189,6 @@ set splitright
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
-autocmd Syntax javascript set syntax=jquery " JQuery syntax support
-
 set matchpairs+=<:>
 set statusline+=%{fugitive#statusline()} "  Git Hotness
 
@@ -193,8 +199,6 @@ let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos="left"
-autocmd vimenter * if !argc() | NERDTree | endif " Automatically open a NERDTree if no files where specified
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " Close vim if the only window left open is a NERDTree
 
 " Emmet
 let g:user_emmet_mode='i' " enable for insert mode
