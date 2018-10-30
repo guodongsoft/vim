@@ -237,6 +237,9 @@ set wildignore+=node_modules/**
 " Snippets author
 let g:snips_author = 'guodong'
 
+" vim-go settings
+let g:go_fmt_command = "goimports"
+
 if version >= 800
   call LoadScript("~/.vim/script/vimrc.version8")
 else

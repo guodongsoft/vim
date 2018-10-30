@@ -45,6 +45,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'chemzqm/vim-jsx-improve'
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'editorconfig/editorconfig-vim'
+Bundle 'fatih/vim-go'
 
 if (version >= 800)
     Bundle 'Shougo/deoplete.nvim'
