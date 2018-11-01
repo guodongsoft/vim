@@ -48,3 +48,6 @@ nnoremap <C-l> <C-w>l
 " nohlsearch shortcut
 nnoremap -hl :nohlsearch<CR>
 nnoremap +hl :set hlsearch<CR>
+
+onoremap p i(
+onoremap b /return<CR>
