@@ -1,0 +1,79 @@
+vim:
+./configure --with-features=huge --disable-darwin --enable-multibyte --enable-xim --enable-fontset --enable-pythoninterp --enable-python3interp --enable-rubyinterp --enable-perlinterp --enable-luainterp --enable-cscope --with-x --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu --with-lua-prefix=/usr --with-luajit --enable-mzschemeinterp --with-plthome=/usr/local/share/racket --enable-tclinterp --with-tclsh=tclsh8.6 --enable-largefile --enable-fail-if-missing
+
+Vim configure 詳しい説明：
+    --prefix=PATH でインストール先を指定する。
+        このディレクトリに bin/ や man/ ができる。
+        デフォルトは /usr/local
+    --enable-FEATURE で機能が有効になる。
+    --with-PACKAGE でパッケージが有効になる。
+    --disable-FEATURE --without-PACKAGE でそれぞれ無効になる。
+    FEATURE や PACKAGE の一覧は ./configure --help で見れる。
+    --with-features で大まかな機能を決める。
+        tiny, small, normal, big, huge の中から選ぶ。右に行くほど大きい。デフォルトは normal。
+        具体的にどれで何の機能が入るのかはよく分からなかったorz
+    --enable-rubyinterp を入れるには ruby-devel が別途必要。
+        他の interp でも必要だと思われる(最初から入っていたので未確認)。
+    --enable-perlinterp を入れるには perl 側に ExtUtils::Embed モジュールが必要。
+
+以下 FEATURE と PACKAGE のリスト。 --help から抜粋。
+
+    Optional Features:
+    --disable-option-checking ignore unrecognized --enable/--with options
+    --disable-FEATURE do not include FEATURE (same as --enable-FEATURE=no)
+    --enable-FEATURE[=ARG] include FEATURE [ARG=yes]
+    --disable-darwin Disable Darwin (Mac OS X) support.
+    --disable-selinux	Don't check for SELinux support.
+    --disable-xsmp Disable XSMP session management
+    --disable-xsmp-interact Disable XSMP interaction
+    --enable-mzschemeinterp Include MzScheme interpreter.
+    --enable-perlinterp Include Perl interpreter.
+    --enable-pythoninterp Include Python interpreter.
+    --enable-tclinterp Include Tcl interpreter.
+    --enable-rubyinterp Include Ruby interpreter.
+    --enable-cscope Include cscope interface.
+    --enable-workshop Include Sun Visual Workshop support.
+    --disable-netbeans Disable NetBeans integration support.
+    --enable-sniff Include Sniff interface.
+    --enable-multibyte Include multibyte editing support.
+    --enable-hangulinput Include Hangul input support.
+    --enable-xim Include XIM input support.
+    --enable-fontset Include X fontset output support.
+    --enable-gui=OPTS X11 GUI default=auto OPTS=auto/no/gtk/gtk2/gnome/gnome2/motif/athena/neXtaw/photon/carbon
+    --enable-gtk-check If auto-select GUI, check for GTK default=yes
+    --enable-gtk2-check If GTK GUI, check for GTK+ 2 default=yes
+    --enable-gnome-check If GTK GUI, check for GNOME default=no
+    --enable-motif-check If auto-select GUI, check for Motif default=yes
+    --enable-athena-check If auto-select GUI, check for Athena default=yes
+    --enable-nextaw-check If auto-select GUI, check for neXtaw default=yes
+    --enable-carbon-check If auto-select GUI, check for Carbon default=yes
+    --disable-gtktest Do not try to compile and run a test GTK program
+    --disable-acl Don't check for ACL support.
+    --disable-gpm Don't use gpm (Linux mouse daemon).
+    --disable-sysmouse Don't use sysmouse (mouse in *BSD console).
+    --disable-nls Don't support NLS (gettext()).
+
+    Optional Packages:
+    --with-PACKAGE[=ARG] use PACKAGE [ARG=yes]
+    --without-PACKAGE do not use PACKAGE (same as --with-PACKAGE=no)
+    --with-mac-arch=ARCH current, intel, ppc or both
+    --with-local-dir=PATH search PATH instead of /usr/local for local libraries.
+    --without-local-dir do not search /usr/local for local libraries.
+    --with-vim-name=NAME what to call the Vim executable
+    --with-ex-name=NAME what to call the Ex executable
+    --with-view-name=NAME what to call the View executable
+    --with-global-runtime=DIR global runtime directory in 'runtimepath'
+    --with-modified-by=NAME name of who modified a release version
+    --with-features=TYPE tiny, small, normal, big or huge (default: normal)
+    --with-compiledby=NAME name to show in :version message
+    --with-plthome=PLTHOME Use PLTHOME.
+    --with-python-config-dir=PATH Python's config directory
+    --with-tclsh=PATH which tclsh to use (default: tclsh8.0)
+    --with-x use the X Window System
+    --with-gtk-prefix=PFX Prefix where GTK is installed (optional)
+    --with-gtk-exec-prefix=PFX Exec prefix where GTK is installed (optional)
+    --with-gnome-includes=DIR Specify location of GNOME headers
+    --with-gnome-libs=DIR Specify location of GNOME libs
+    --with-gnome Specify prefix for GNOME files
+    --with-motif-lib=STRING Library for Motif
+    --with-tlib=library terminal library to be used
