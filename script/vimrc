@@ -198,6 +198,7 @@ let NERDTreeWinSize=40
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
+let NERDTreeShowHidden=1
 let NERDTreeWinPos="left"
 
 " Emmet
