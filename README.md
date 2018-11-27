@@ -153,3 +153,8 @@
 > `执行:GoImplements，显示当前类型实现的interface列表。`
 
 > `执行:GoRename [to]，将当前光标下的符号替换为[to]。`
+
+## 7. Eslint
+
+> `sudo npm install -g eslint`
+
