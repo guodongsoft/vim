@@ -46,6 +46,7 @@ Bundle 'chemzqm/vim-jsx-improve'
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'fatih/vim-go'
+Bundle 'dkprice/vim-easygrep'
 
 if (version >= 800)
     Bundle 'Shougo/deoplete.nvim'
