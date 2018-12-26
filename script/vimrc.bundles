@@ -49,6 +49,7 @@ Bundle 'fatih/vim-go'
 Bundle 'dkprice/vim-easygrep'
 Bundle 'racer-rust/vim-racer'
 Bundle 'rust-lang/rust.vim'
+Bundle 'dag/vim-fish'
 
 if (version >= 800)
     Bundle 'Shougo/deoplete.nvim'
