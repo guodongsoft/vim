@@ -5,7 +5,7 @@ if has('nvim')
     endf
 else
     fu! OpenTerminal()
-        :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
+        :call term_start('fish', {'curwin' : 1, 'term_finish' : 'close'})
     endf
 endif
 

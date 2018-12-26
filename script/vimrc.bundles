@@ -47,6 +47,8 @@ Bundle 'Chiel92/vim-autoformat'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'fatih/vim-go'
 Bundle 'dkprice/vim-easygrep'
+Bundle 'racer-rust/vim-racer'
+Bundle 'rust-lang/rust.vim'
 
 if (version >= 800)
     Bundle 'Shougo/deoplete.nvim'

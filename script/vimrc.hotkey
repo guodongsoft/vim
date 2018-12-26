@@ -52,6 +52,11 @@ nnoremap +hl :set hlsearch<CR>
 onoremap p i(
 onoremap b /return<CR>
 
+" 在 Normal 模式下, 敲 <leader>jd 跳转到定义或声明(支持跨文件)
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 在 Insert 模式下, 敲 <leader>; 补全
+inoremap <leader>; <C-x><C-o>
+
 " vim-go custom mappings
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)

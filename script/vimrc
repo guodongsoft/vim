@@ -169,6 +169,8 @@ set tags=tags
 set tags+=./tags "add current directory's generated tags file
 set tags+=/usr/include/c++/tags
 set tags+=~/source/tags
+set tags+=~/.rbenv/versions/2.5.0/lib/ruby/2.5.0/tags
+set tags+=~/work/ruby/rails/github/rails/tags
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -211,6 +213,16 @@ set hlsearch  " Search results high light
 " Javascript syntax hightlight
 syntax enable
 
+" 开启rust的自动reformat的功能
+let g:rustfmt_autosave = 1
+
+" 手动补全和定义跳转
+set hidden
+" 这一行指的是你编译出来的racer所在的路径
+let g:racer_cmd = "/Users/dongguo/.cargo/bin/racer"
+let $RUST_SRC_PATH="/Users/dongguo/.multirust/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src/"
+let g:ycm_rust_src_path="/Users/dongguo/.multirust/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src/"
+
 " ctrap
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -238,6 +250,7 @@ set wildignore+=node_modules/**
 " Snippets author
 let g:snips_author = 'guodong'
 
+" ESLint
 let g:syntastic_javascript_checkers = ['eslint']
 
 " vim-go settings
