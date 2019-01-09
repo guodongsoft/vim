@@ -59,13 +59,4 @@ else
     Bundle 'Shougo/neocomplete'
 endif
 
-" Markdown
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-if has('osx')
-    Bundle 'hashrocket/vim-macdown'
-else
-    Bundle 'suan/vim-instant-Markdown'
-endif
-
 filetype on
